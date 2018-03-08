@@ -25,6 +25,11 @@ public class Character_banca : MonoBehaviour
     private Node closestNode;
     private Node goingTo;
 
+	public AudioClip AudioClip;
+	//public AudioClip AudioClipPasos;
+	public AudioSource AudioSou;
+	//public AudioSource AudioSouPasos;
+
     // Use this for initialization
     void Start()
     {
@@ -32,6 +37,9 @@ public class Character_banca : MonoBehaviour
         closestNode = nodeWorld[0];
         goingTo = patrol[start];
 		bandera = true;
+
+		AudioSou.clip = AudioClip;
+		AudioSou.Play ();
     }
 
     // Update is called once per frame
