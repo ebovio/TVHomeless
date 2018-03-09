@@ -60,13 +60,6 @@ public class Character_comida : MonoBehaviour
                 goingTo = patrol[start];
             }
         }
-        if (goingTo == patrol[patrol.Length - 1])
-        {
-            Vector3 moveDir = (nodePosition - transform.position).normalized;
-            transform.position += moveDir * speed * Time.deltaTime;
-            keepPatrol = false;
-
-        }
         if (start == 2)
         {
             StartCoroutine(Example());
@@ -79,9 +72,10 @@ public class Character_comida : MonoBehaviour
         if (start == 7)
         {
             StartCoroutine(Example2());
+            keepPatrol = false;
+            StartCoroutine(changeScene());
            
         }
-
     }
 
     IEnumerator Example()
@@ -102,5 +96,11 @@ public class Character_comida : MonoBehaviour
     public void setPatrol(bool patrol)
     {
         this.keepPatrol = patrol;
+    }
+
+    IEnumerator changeScene()
+    {
+        yield return new WaitForSeconds(7);
+        Application.LoadLevel("NewCitybanca_sentado");
     }
 }

@@ -53,7 +53,7 @@ public class CharacterD : MonoBehaviour
             else
             {
                 Vector3 moveDir = (nodePosition - transform.position).normalized;
-                //transform.position += moveDir * speed * Time.deltaTime;
+                transform.position += moveDir * speed * Time.deltaTime;
                 //transform.LookAt(patrol[(start) % patrol.Length].transform);
                 goingTo = patrol[(start) % patrol.Length];
                 //transform.Translate(transform.forward * Time.deltaTime * speed, Space.World);
@@ -63,7 +63,7 @@ public class CharacterD : MonoBehaviour
         {
             keepPatrol = false;
             mensaje.text = "The first Street Population Census in Mexico City unveiled that 4,354 people live without a shelter and 2,400 people live in public or private wards";
-            Debug.Log("aparece");
+            StartCoroutine(changeSceneBanca());
         }
         
     }
@@ -73,5 +73,11 @@ public class CharacterD : MonoBehaviour
         speed = 0;
         yield return new WaitForSeconds(3.0f);
         speed = 2;
+    }
+
+    IEnumerator changeSceneBanca()
+    {
+        yield return new WaitForSeconds(7);
+        Application.LoadLevel("NewCitybanca_sentado");
     }
 }
