@@ -22,6 +22,7 @@ ModelImporter:
     2100020: surfaceShader8SG
     2100022: surfaceShader1SG
     2100024: surfaceShader7SG
+    2100026: defaultMat
     2300000: default
     3300000: default
     4300000: default

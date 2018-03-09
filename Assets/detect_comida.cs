@@ -10,6 +10,8 @@ public class detect_comida : MonoBehaviour {
     public GameObject basurero_cerrado, basurero_cerrado2;
     public GameObject basurero_abierto, basurero_abierto2;
 
+    public Character_comida player;
+
 
     void Start(){
 		tiempostart = 0;
@@ -30,7 +32,6 @@ public class detect_comida : MonoBehaviour {
             {
                 basurero_abierto.SetActive(true);
                 basurero_cerrado.SetActive(false);
-                //Debug.Log("I was selected after 2 seconds");
             } else if (hit.collider.gameObject.name == basurero_cerrado2.name && waitingTime(1)){
                 basurero_abierto2.SetActive(true);
                 basurero_cerrado2.SetActive(false);

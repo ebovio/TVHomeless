@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Character_comida : MonoBehaviour
 {
@@ -24,13 +25,18 @@ public class Character_comida : MonoBehaviour
     private Node closestNode;
     private Node goingTo;
 
+    AudioSource m_MyAudioSource;
+
+    public Text texto;
+
     // Use this for initialization
     void Start()
     {
+        texto.text = "";
         closest = Vector3.Distance(transform.position, nodeWorld[0].transform.position);
         closestNode = nodeWorld[0];
         goingTo = patrol[start];
-     
+
     }
 
     // Update is called once per frame
@@ -54,23 +60,26 @@ public class Character_comida : MonoBehaviour
                 goingTo = patrol[start];
             }
         }
-        if(goingTo == patrol[patrol.Length-1])
+        if (goingTo == patrol[patrol.Length - 1])
         {
             Vector3 moveDir = (nodePosition - transform.position).normalized;
             transform.position += moveDir * speed * Time.deltaTime;
             keepPatrol = false;
+
         }
-        else if (goingTo == patrol[2])
+        if (start == 2)
         {
             StartCoroutine(Example());
+            
         }
-        else if (goingTo == patrol[6])
+        if (start == 5)
         {
-            StartCoroutine(Example());
+           StartCoroutine(Example());
         }
-        else if (goingTo == patrol[7])
+        if (start == 7)
         {
-            StartCoroutine(Example());
+            StartCoroutine(Example2());
+           
         }
 
     }
@@ -81,5 +90,17 @@ public class Character_comida : MonoBehaviour
         yield return new WaitForSeconds(2.0f);
         speed = 3;
        
+    }
+    IEnumerator Example2()
+    {
+        speed = 0;
+        yield return new WaitForSeconds(1.0f);
+        texto.text = "805 million people worldwide do not have enough food to eat.           More than 750 million people lack access to clean drinking water.              Hunger is the number one cause of death in the world, killing more than HIV/AIDS, malaria, and tuberculosis combined.";
+
+    }
+
+    public void setPatrol(bool patrol)
+    {
+        this.keepPatrol = patrol;
     }
 }
