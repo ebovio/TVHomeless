@@ -33,6 +33,7 @@ public class DetectMenu : MonoBehaviour
 			if (hit.collider.gameObject.name == boton.name && waitingTime(3))
 			{
 				Debug.Log("Empezar juego");
+				StartCoroutine ("ChangeLevel");
 			}
 
 		}
@@ -41,6 +42,14 @@ public class DetectMenu : MonoBehaviour
 			Debug.DrawLine(transform.position, distancia, Color.green);
 			bandera = 0;
 		}
+	}
+
+	IEnumerator ChangeLevel(){
+		print ("corutina empezo");
+		float fadeTime = GameObject.Find ("BotonPlay").GetComponent<fading> ().BeginFade (1);
+		yield return new WaitForSeconds (fadeTime);
+		Application.LoadLevel ("Inicio");
+		print ("corrutina termino");
 	}
 
 	public bool waitingTime(int wait)
