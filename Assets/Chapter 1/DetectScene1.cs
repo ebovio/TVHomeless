@@ -5,6 +5,11 @@ using UnityEngine;
 public class DetectScene1 : MonoBehaviour
 {
 
+    // Notes 
+    public AudioClip pickUpNote;
+    private AudioSource source;
+
+    // Use this for initialization
     private int tiempostart;
     private int bandera;
 
@@ -12,14 +17,18 @@ public class DetectScene1 : MonoBehaviour
 
     public GameObject phone;
     public GameObject mailPapers;
-    public GameObject fridgeItem;
     public GameObject door;
 
     void Start()
     {
         tiempostart = 0;
         bandera = 0;
+        source = GetComponent<AudioSource>();
+    }
 
+    private void playNote()
+    {
+        source.Play();
     }
 
     // Update is called once per frame
@@ -33,24 +42,20 @@ public class DetectScene1 : MonoBehaviour
         {
             Debug.DrawLine(transform.position, distancia, Color.red);
 
-            if (hit.collider.gameObject.name == phone.name && waitingTime(3))
+            if (hit.collider.gameObject.name == phone.name && waitingTime(4))
             {
-                Debug.Log("Ring Ring Ring");
                 player.setPatrol(true);
             }
-            if (hit.collider.gameObject.name == mailPapers.name && waitingTime(4))
-            {
-                Debug.Log("Fucking debts");
-                player.setPatrol(true);
-            }
-            if (hit.collider.gameObject.name == fridgeItem.name && waitingTime(4))
-            {
-                Debug.Log("I was hungry");
-                player.setPatrol(true);
+            if (hit.collider.gameObject.name == mailPapers.name) {
+                playNote();
+                if (hit.collider.gameObject.name == mailPapers.name && waitingTime(4))
+                {
+                    player.setPatrol(true);
+                }
             }
             if (hit.collider.gameObject.name == door.name && waitingTime(4))
             {
-                Debug.Log("Kicked out of my house");
+                                
                 player.setPatrol(true);
             }
 
@@ -72,6 +77,7 @@ public class DetectScene1 : MonoBehaviour
 
         if ((tiempostart + wait) <= (int)Time.realtimeSinceStartup)
         {
+            tiempostart = 0;
             return true;
         }
         return false;
